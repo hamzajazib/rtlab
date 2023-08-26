@@ -22,16 +22,18 @@ Advanced Red Team Lab Infrastructure on Azure using Terraform
 
 2. Open Azure Cloud Shell and select "PowerShell" as the interpreter environment
 
-
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/b70a7668-b3d9-4565-a2a0-63051174f84f)
 
 3. If this is your first time using the Azure account, when displayed "You have no storage mounted" and prompted to create a file share, select "Show advanced settings"
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/dfc58499-7f74-4b7b-a172-cfc7ca6b7fa2)
 
 
 4. Select `Subscription`, `Cloud Shell region`, enter names for `Resource group`, `Storage account` and `File share` and press the "Create Storage" button
 
 Note: Storage account must be unique across all Azure subscriptions globally, not just yours. The reason for that is that the name becomes part of the URL, e.g. `https://accountname.blob.core.windows.net`
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/366bceec-bda2-46f6-8589-d7f21c8319d3)
 
 
 # Install/Update Terraform
@@ -43,6 +45,7 @@ Note: Storage account must be unique across all Azure subscriptions globally, no
 terraform version
 ```
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/1e922d13-e642-4513-8572-49db5ffab60d)
 
 
 * * *
@@ -51,6 +54,7 @@ If the version is out of date, browse to [Terraform Downloads](https://www.terra
 
 - Note: Azure Shell is based on Azure Linux (linux_amd64), so we need the Linux - AMD64 version
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/645af607-190e-4984-a7f8-df9829999e30)
 
 
 ```plaintext
@@ -71,13 +75,18 @@ mkdir bin
 mv terraform bin/
 ```
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/cb16157a-977f-404f-85b2-2208f913f752)
 
 
 Restart Cloud Shell
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/4a3ecb70-aa93-4ab8-8439-4e3629d8c2e0)
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/e278e319-6bb6-4b47-8d15-5aa6084d1536)
+
 
 Confirm terraform is updated
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/74799227-92d5-48b0-8e56-2893645c34e5)
 
 
 # Authenticate via a Microsoft account from Cloud Shell (using PowerShell)
@@ -87,6 +96,7 @@ Confirm terraform is updated
 Get-AzSubscription
 ```
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/b77d3291-1681-4832-a4d8-2a951a58bcdd)
 
 
 Save both `Subscription ID` and `tenantId` for upcoming steps
@@ -106,6 +116,8 @@ $sp.AppId
 $sp.PasswordCredentials.SecretText
 ```
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/e3f15d56-de49-494d-8be4-4ee77fd20d3b)
+
 
 Save both `AppId` and `PasswordCredentials.SecretText` for upcoming steps
 
@@ -124,6 +136,7 @@ $env:ARM_CLIENT_SECRET="<service_principal_password>"
 gci env:ARM_*
 ```
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/455ef853-0b81-4155-9a3c-b6a4d57f18fe)
 
 
 ## Specify service principal credentials in a Terraform provider block
@@ -160,10 +173,14 @@ Pre-requisites:
 
 2. Upload zip archive to Azure using Cloud Shell
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/0488feb9-749a-44eb-bb2f-6b26d9d89ccc)
+
 
 3. Extract archive
 
 4. Run `rtlab\tf-deploy.ps1`
+
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/6f05c69a-94eb-4a60-bce7-1d3721517ca8)
 
 
 Wait for deployment to finish (takes around ~45-60 minutes)
@@ -232,15 +249,27 @@ Output containing credentials and SSH keys are displayed on console as well as s
 
 1. After successful deployment, download the VPN client configuration archive from the link in the output
 
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/aa66e16a-5ba9-43aa-8954-f70c619f9da2)
+
+
 2. Extract archive
 
 3. Copy `PRIVATE KEY` data and `P2SChildCert` data from `rtlab\Terraform\VPNcerts\profileinfo.txt` and put them in `vpnclientconfiguration\OpenVPN\vpnconfig.ovpn` using any text editor
+
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/5df0b862-caf0-40b5-827d-e1b0ad4347e4)
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/f70fb95f-56a7-41e1-88ab-20048618d697)
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/787569b6-f2d7-4f6e-a13e-872302bcabfa)
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/a124f50e-c0a7-4396-87cc-abaf0988b243)
+
 
 # Putting VMs to stopped(de-allocated) state
 
 VMs on Azure are billed in both `running` and `stopped` state, as resources remain allocated in the datacenter for these two states. In the `stopped (deallocated)` state, VMs don't incur a cost, although OS disks reserved for the VMs will be still billed.
 
 `rtlab/tf-deploy.ps1` automatically stops all VMs after deployment to save costs. However, after using lab VMs, please use the `rtlab/dealloc-all-vm.ps1` script to deallocate resources and save costs.
+
+![image](https://github.com/hamzajazib/tf-rtlab/assets/82419998/5de59bd0-1d9f-4e79-9323-38243698c7d1)
+
 
 # Console Output
 
