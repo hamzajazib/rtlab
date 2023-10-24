@@ -2,7 +2,7 @@
 
 Advanced Red Team Lab Infrastructure on Azure using Terraform
 
-### Note: Tested on terraform/1.5.4, please use the same version to avoid deployment issues
+**Note: Tested on terraform/1.5.4, please use the same version to avoid deployment issues**
 
 # Lab Build
 
